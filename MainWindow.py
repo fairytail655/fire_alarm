@@ -4,22 +4,27 @@ Version: -
 Author: Fox_benjiaming
 Date: 2021-03-21 09:44:53
 LastEditors: Fox_benjiaming
-LastEditTime: 2021-03-21 13:47:33
+LastEditTime: 2021-03-21 15:26:19
 '''
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QMainWindow, QApplication 
+from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtSerialPort import QSerialPort
 from PyQt5.QtCore import QTimer, QThread
 from PyQt5.QtGui import QPixmap
+
+import socket
+
 from Ui_MainWindow import Ui_MainWindow
 from SerialPort import SerialPort
 from MyCombox import MyCombox
 from Threads import ThreadCamera
+from tcp_logic import TcpServer
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow, TcpServer):
     def __init__(self):
-        super().__init__()
+        super(MainWindow, self).__init__()
+        TcpServer.__init__(self)
         self.setupUi(self)
 
         # 状态栏配置
@@ -85,6 +90,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 开关按钮配置
         self.pushButton_flag = True
         self.pushButton_switch.clicked.connect(self.onPushButton_ClickedSlot)
+
+        # 自动获取ip
+        self.auto_get_ip()
+        self.tcp_server_start()
+
+    # 获取本机ip
+    def auto_get_ip(self):
+        self.lineEdit_ip.clear()
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 80))
+        my_addr = s.getsockname()[0]
+        self.lineEdit_ip.setText(str(my_addr))
+        s.close()
 
     # 串口号选择
     def onCombox_EnterSlot(self):
@@ -204,6 +222,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             self.lineEdit_ip.setReadOnly(False)
             self.lineEdit_telephone.setReadOnly(False)
+
+    def closeEvent():
 
 if __name__ == '__main__':
     import sys

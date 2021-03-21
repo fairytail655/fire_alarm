@@ -4,9 +4,10 @@ Version: -
 Author: Fox_benjiaming
 Date: 2021-03-21 14:11:49
 LastEditors: Fox_benjiaming
-LastEditTime: 2021-03-21 14:57:58
+LastEditTime: 2021-03-21 16:08:33
 '''
 from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 import socket
 import threading
 import sys
@@ -15,11 +16,13 @@ from stopThreading import stop_thread
 TCP_SERVER_PORT = 8080
 
 class TcpServer(object):
+    sign_tcp_msg = QtCore.pyqtSignal(str)
     def __init__(self):
         self.tcp_socket = None
         self.sever_th = None
         self.link = False  # 用于标记是否开启了连接
         self.client_socket_list = []
+        self.tcp_close_flag = False
 
     def tcp_server_start(self):
         """
@@ -67,6 +70,7 @@ class TcpServer(object):
                     else:
                         if recv_msg:
                             msg = recv_msg.decode('utf-8')
+                            self.sign_tcp_msg.emit(msg)
                             msg = '来自IP:{}端口:{}:\n{}\n'.format(address[0], address[1], msg)
                             print(msg)
                         else:
@@ -74,6 +78,14 @@ class TcpServer(object):
                             self.client_socket_list.remove((client, address))
             except:
                 pass
+            # 关闭
+            if self.tcp_close_flag:
+                self.tcp_close()
+                self.link = False
+                self.tcp_close_flag = False
+                break
+            else:
+                self.link = True
 
     def tcp_send(self):
         """
@@ -105,29 +117,9 @@ class TcpServer(object):
         功能函数，关闭网络连接的方法
         :return:
         """
-        if self.comboBox_tcp.currentIndex() == 0:
-            try:
-                for client, address in self.client_socket_list:
-                    client.close()
-                self.tcp_socket.close()
-                if self.link is True:
-                    msg = '已断开网络\n'
-                    self.signal_write_msg.emit(msg)
-            except Exception as ret:
-                pass
-        if self.comboBox_tcp.currentIndex() == 1:
-            try:
-                self.tcp_socket.close()
-                if self.link is True:
-                    msg = '已断开网络\n'
-                    self.signal_write_msg.emit(msg)
-            except Exception as ret:
-                pass
         try:
-            stopThreading.stop_thread(self.sever_th)
-        except Exception:
-            pass
-        try:
-            stopThreading.stop_thread(self.client_th)
-        except Exception:
+            for client, address in self.client_socket_list:
+                client.close()
+            self.tcp_socket.close()
+        except Exception as ret:
             pass

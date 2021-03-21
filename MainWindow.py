@@ -4,15 +4,16 @@ Version: -
 Author: Fox_benjiaming
 Date: 2021-03-21 09:44:53
 LastEditors: Fox_benjiaming
-LastEditTime: 2021-03-21 15:26:19
+LastEditTime: 2021-03-21 16:15:41
 '''
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QMainWindow, QApplication
 from PyQt5.QtSerialPort import QSerialPort
 from PyQt5.QtCore import QTimer, QThread
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QCloseEvent
 
 import socket
+import json
 
 from Ui_MainWindow import Ui_MainWindow
 from SerialPort import SerialPort
@@ -93,7 +94,11 @@ class MainWindow(QMainWindow, Ui_MainWindow, TcpServer):
 
         # 自动获取ip
         self.auto_get_ip()
+        # 开启tcp server
         self.tcp_server_start()
+
+        # 绑定tcp数据接收信号
+        self.sign_tcp_msg.connect(self.slot_tcp_msg)
 
     # 获取本机ip
     def auto_get_ip(self):
@@ -223,7 +228,19 @@ class MainWindow(QMainWindow, Ui_MainWindow, TcpServer):
             self.lineEdit_ip.setReadOnly(False)
             self.lineEdit_telephone.setReadOnly(False)
 
-    def closeEvent():
+    # 接收到TCP Client发送来的数据
+    def slot_tcp_msg(self, str):
+        try:
+            data_dict = json.loads(str)
+        except:
+            print("TCP Client data error")
+
+    # 窗口关闭事件
+    def closeEvent(self, event):
+        self.tcp_close_flag = True
+        while self.link:
+            pass
+        event.accept()
 
 if __name__ == '__main__':
     import sys

@@ -4,13 +4,13 @@ Version: -
 Author: Fox_benjiaming
 Date: 2021-03-21 09:44:53
 LastEditors: Fox_benjiaming
-LastEditTime: 2021-03-21 16:15:41
+LastEditTime: 2021-03-21 17:50:44
 '''
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 from PyQt5.QtSerialPort import QSerialPort
 from PyQt5.QtCore import QTimer, QThread
-from PyQt5.QtGui import QPixmap, QCloseEvent
+from PyQt5.QtGui import QPixmap, QCloseEvent, QPalette
 
 import socket
 import json
@@ -79,6 +79,16 @@ class MainWindow(QMainWindow, Ui_MainWindow, TcpServer):
         self.comboBox_parity.addItem('偶校验')
         self.comboBox_parity.setCurrentIndex(0)
         self.comboBox_parity.currentIndexChanged.connect(self.onCombox_parity_IncdeChangeSlot)
+
+        # 报警值配置
+        self.device1_temp_alarm = float(self.lineEdit_device1_temp.text())
+        self.device1_ir_alarm = float(self.lineEdit_device1_ir.text())
+        self.device1_smoke_alarm = float(self.lineEdit_device1_smoke.text())
+        self.device1_fire_alarm = float(self.lineEdit_device1_fire.text())
+        self.device2_temp_alarm = float(self.lineEdit_device2_temp.text())
+        self.device2_ir_alarm = float(self.lineEdit_device2_ir.text())
+        self.device2_smoke_alarm = float(self.lineEdit_device2_smoke.text())
+        self.device2_fire_alarm = float(self.lineEdit_device2_fire.text())
 
         # 摄像头显示进程配置
         self.thread_camera = ThreadCamera()
@@ -232,6 +242,11 @@ class MainWindow(QMainWindow, Ui_MainWindow, TcpServer):
     def slot_tcp_msg(self, str):
         try:
             data_dict = json.loads(str)
+            if data_dict['device'] == '1':
+                    # self.lcdNumber_device1_temp.setStyleSheet('color: green;')
+                # else:
+                #     self.lcdNumber_device1_temp.setStyleSheet('color: red;')
+                self.lcdNumber_device1_temp.display(data_dict['temp'])
         except:
             print("TCP Client data error")
 

@@ -48,7 +48,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -232,6 +232,9 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk{background:green}</string>
+                </property>
                 <property name="value">
                  <number>0</number>
                 </property>
@@ -318,6 +321,9 @@
                   <width>160</width>
                   <height>0</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk{background:green}</string>
                 </property>
                 <property name="value">
                  <number>0</number>
@@ -406,6 +412,9 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk{background:green}</string>
+                </property>
                 <property name="value">
                  <number>0</number>
                 </property>
@@ -489,7 +498,7 @@
                </size>
               </property>
               <property name="text">
-               <string>1.0</string>
+               <string>5.0</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -681,7 +690,7 @@
              </size>
             </property>
             <property name="text">
-             <string>30</string>
+             <string>60</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -815,6 +824,9 @@
               <height>0</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QProgressBar::chunk{background:green}</string>
+            </property>
             <property name="value">
              <number>0</number>
             </property>
@@ -896,7 +908,7 @@
              </size>
             </property>
             <property name="text">
-             <string>30</string>
+             <string>50</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1031,6 +1043,9 @@
               <height>0</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QProgressBar::chunk{background:green}</string>
+            </property>
             <property name="value">
              <number>0</number>
             </property>
@@ -1112,7 +1127,7 @@
              </size>
             </property>
             <property name="text">
-             <string>1.0</string>
+             <string>5.0</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1262,6 +1277,9 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk{background:green}</string>
+                </property>
                 <property name="value">
                  <number>0</number>
                 </property>
@@ -1348,6 +1366,9 @@
                   <width>160</width>
                   <height>0</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk{background:green}</string>
                 </property>
                 <property name="value">
                  <number>0</number>
@@ -1436,6 +1457,9 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QProgressBar::chunk{background:green}</string>
+                </property>
                 <property name="value">
                  <number>0</number>
                 </property>
@@ -1519,7 +1543,7 @@
                </size>
               </property>
               <property name="text">
-               <string>1.0</string>
+               <string>5.0</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -1711,7 +1735,7 @@
              </size>
             </property>
             <property name="text">
-             <string>30</string>
+             <string>60</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1845,6 +1869,9 @@
               <height>0</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QProgressBar::chunk{background:green}</string>
+            </property>
             <property name="value">
              <number>0</number>
             </property>
@@ -1926,7 +1953,7 @@
              </size>
             </property>
             <property name="text">
-             <string>30</string>
+             <string>50</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -2168,6 +2195,9 @@
               <height>0</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QProgressBar::chunk{background:green}</string>
+            </property>
             <property name="value">
              <number>0</number>
             </property>
@@ -2249,7 +2279,7 @@
              </size>
             </property>
             <property name="text">
-             <string>1.0</string>
+             <string>5.0</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>

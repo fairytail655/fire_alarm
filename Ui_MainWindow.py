@@ -1086,7 +1086,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Fire Monitor"))
         self.groupBox_21.setTitle(_translate("MainWindow", "在线状态"))
         self.label_56.setText(_translate("MainWindow", "在线："))
         self.label_58.setText(_translate("MainWindow", "离线："))

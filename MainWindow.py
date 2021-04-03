@@ -4,7 +4,7 @@ Version: -
 Author: Fox_benjiaming
 Date: 2021-03-21 09:44:53
 LastEditors: Fox_benjiaming
-LastEditTime: 2021-04-03 09:54:24
+LastEditTime: 2021-04-03 11:24:47
 '''
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
